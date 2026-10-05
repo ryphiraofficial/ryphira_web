@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Production builds
+dist/
+frontend/dist/
+dist-ssr/
+frontend/dist-ssr/
+
+# Local & environment variables
+*.local
+.env
+.env.*
+!.env.example
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing & MCP artifacts
+.playwright-mcp/
+.system_generated/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
