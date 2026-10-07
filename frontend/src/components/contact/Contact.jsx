@@ -39,7 +39,13 @@ export default function Contact() {
           {/* ─────────────────────────────────────────────────────────
               LEFT COLUMN: Header, Contact Info & Socials
           ───────────────────────────────────────────────────────── */}
-          <div className="lg:col-span-5 flex flex-col space-y-8 sm:space-y-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            className="lg:col-span-5 flex flex-col space-y-8 sm:space-y-10"
+          >
             
             {/* Title */}
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#0f172a] tracking-tight leading-tight">
@@ -150,13 +156,19 @@ export default function Contact() {
 
             </div>
 
-          </div>
+          </motion.div>
 
 
           {/* ─────────────────────────────────────────────────────────
               RIGHT COLUMN: Clean Form Layout
           ───────────────────────────────────────────────────────── */}
-          <div className="lg:col-span-7 pt-2 lg:pt-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.55, delay: 0.15, ease: 'easeOut' }}
+            className="lg:col-span-7 pt-2 lg:pt-4"
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
               
               {/* Row 1: Your Name & Email address (2 Columns) */}
@@ -231,7 +243,7 @@ export default function Contact() {
               </div>
 
             </form>
-          </div>
+          </motion.div>
 
         </div>
 

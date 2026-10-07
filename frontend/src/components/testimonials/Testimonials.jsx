@@ -2,66 +2,81 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-// Avatars from assets
-import avatar1 from '../../assets/hero/team/team_1.jpg';
-import avatar2 from '../../assets/hero/team/team_2.jpg';
-import avatar3 from '../../assets/hero/team/team_3.jpg';
-import avatar4 from '../../assets/hero/team/team_4.jpg';
-import avatar5 from '../../assets/hero/team/team_5.jpg';
-import avatar6 from '../../assets/hero/team/team_6.jpg';
-
 export const customerStories = [
   {
     id: 1,
-    name: 'Andrew Norris',
-    company: 'ADROLL',
-    avatar: avatar1,
-    quote: 'Huge fan of Ryphira, it helps us embed, translate and point users to our platform with ease. Amazingly responsive engineering team too. Happy customer, let us work together more!',
+    name: 'Adithya Mary',
+    company: 'ENTERPRISE SOLUTIONS',
+    quote: 'Ryphira delivered an exceptional software solution that transformed our business operations. Their team’s expertise and dedication are unmatched.',
   },
   {
     id: 2,
-    name: 'Hilda Griffith',
-    company: 'DELL ENTERPRISE',
-    avatar: avatar2,
-    quote: 'Support is both attractive and highly adaptable. Architecture quality is exactly what our business has been lacking. Ryphira is the most valuable tech resource we have EVER invested in.',
+    name: 'Akansh S',
+    company: 'TECH FOUNDER',
+    quote: 'The programming education I received at Ryphira was world-class. It prepared me perfectly for launching my own tech startup.',
   },
   {
     id: 3,
-    name: 'Cora Adkins',
-    company: 'STAPLES DIGITAL',
-    avatar: avatar3,
-    quote: 'It’s just amazing. 24/7 dedicated engineering support, both attractive UI and highly scalable cloud backend. The technical execution from Ryphira is absolutely awesome.',
+    name: 'Nithin Paulson',
+    company: 'DIGITAL INNOVATIONS',
+    quote: 'Working with Ryphira was a game-changer. They delivered on time, within budget, and exceeded all our expectations.',
   },
   {
     id: 4,
-    name: 'David Miller',
-    company: 'FINTECH VENTURES',
-    avatar: avatar4,
-    quote: 'The generative AI pipelines and real-time LLM integration transformed our analytics dashboard completely. We reduced our development cycle by over 60%.',
+    name: 'Sunil Kumar',
+    company: 'GLOBAL PLATFORMS',
+    quote: 'Ryphira’s innovative approach to software development helped us scale our platform to serve millions of users globally.',
   },
   {
     id: 5,
-    name: 'Sarah Jenkins',
-    company: 'NEXUS CLOUD',
-    avatar: avatar5,
-    quote: 'Zero-downtime deployment and microservices architecture exceeded all our expectations. The team is dedicated, communicative, and exceptionally skilled.',
+    name: 'Sarun K.S',
+    company: 'SOFTWARE ENGINEER',
+    quote: 'Thanks to Ryphira’s comprehensive training program, I successfully transitioned from marketing to software development.',
   },
   {
     id: 6,
-    name: 'Michael Chang',
-    company: 'SYNAPSE AI',
-    avatar: avatar6,
-    quote: 'Ryphira delivers enterprise-grade software standards from day one. Their hands-on tech guidance and developer bootcamp training are unmatched in the industry.',
+    name: 'Sajna Sherin',
+    company: 'CLOUD ARCHITECTURE',
+    quote: 'The quality of code and architecture design from Ryphira is outstanding. They truly understand enterprise-level requirements.',
   },
 ];
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const trackRef = useRef(null);
+  const [stepWidth, setStepWidth] = useState(340);
   
   // Total cards to cycle through
   const totalCards = customerStories.length;
   const maxStep = totalCards - 1;
+
+  // Measure exact distance between cards for 100% accurate sliding on all screens
+  useEffect(() => {
+    const updateStepWidth = () => {
+      if (trackRef.current && trackRef.current.children.length > 1) {
+        const card0 = trackRef.current.children[0];
+        const card1 = trackRef.current.children[1];
+        const diff = card1.offsetLeft - card0.offsetLeft;
+        if (diff > 0) {
+          setStepWidth(diff);
+          return;
+        }
+      }
+      if (trackRef.current?.children[0]) {
+        setStepWidth(trackRef.current.children[0].offsetWidth + 20);
+      }
+    };
+
+    updateStepWidth();
+    // Run after fonts/layout settle
+    const timeout = setTimeout(updateStepWidth, 150);
+    window.addEventListener('resize', updateStepWidth);
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', updateStepWidth);
+    };
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : maxStep));
@@ -94,7 +109,13 @@ export default function Testimonials() {
             LEFT: Pure White Background with Giant Watermark Quote + Title + Arrows
             RIGHT: Vibrant Purple/Blue Background with Floating White Testimonial Cards
         ───────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[460px] sm:min-h-[520px] items-stretch relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="grid grid-cols-1 lg:grid-cols-12 min-h-[460px] sm:min-h-[520px] items-stretch relative"
+        >
           
           {/* ─────────────────────────────────────────────────────────
               LEFT COLUMN (White Side ~32% width)
@@ -162,7 +183,7 @@ export default function Testimonials() {
               RIGHT COLUMN (Vibrant Periwinkle / Indigo-Blue ~68% width)
           ───────────────────────────────────────────────────────── */}
           <div
-            className="lg:col-span-8 bg-[#5c60f5] rounded-l-[32px] sm:rounded-l-[48px] py-10 sm:py-16 pl-6 sm:pl-10 md:pl-14 lg:pl-16 pr-6 sm:pr-10 overflow-hidden flex items-center relative"
+            className="lg:col-span-8 bg-[#5c60f5] rounded-3xl sm:rounded-none sm:rounded-l-[48px] py-10 sm:py-16 px-4 sm:pl-10 md:pl-14 lg:pl-16 sm:pr-8 overflow-hidden flex items-center relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -170,38 +191,32 @@ export default function Testimonials() {
             {/* Sliding Track for White Testimonial Cards */}
             <div className="w-full overflow-hidden">
               <motion.div
-                animate={{ x: `-${currentIndex * 340}px` }}
+                ref={trackRef}
+                animate={{ x: -currentIndex * stepWidth }}
                 transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-                className="flex items-center gap-6 sm:gap-8 w-max will-change-transform py-4"
+                className="flex items-center gap-4 sm:gap-6 md:gap-8 w-max will-change-transform py-4"
               >
                 {customerStories.map((story, sIdx) => (
                   <motion.div
                     key={story.id}
                     onClick={() => setCurrentIndex(sIdx)}
                     whileHover={{ y: -6 }}
-                    className={`w-[280px] sm:w-[320px] md:w-[350px] h-[250px] sm:h-[270px] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.18)] flex flex-col justify-between shrink-0 border transition-all duration-300 cursor-pointer ${
+                    className={`w-[calc(100vw-64px)] max-w-[340px] sm:w-[320px] md:w-[350px] min-h-[190px] sm:min-h-[210px] bg-white rounded-[22px] sm:rounded-[26px] p-6 sm:p-7 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.18)] flex flex-col justify-start gap-3.5 sm:gap-4 shrink-0 border transition-all duration-300 cursor-pointer ${
                       currentIndex === sIdx ? 'border-indigo-400 ring-2 ring-white/50' : 'border-white/60 opacity-90 hover:opacity-100'
                     }`}
                   >
-                    {/* Card Top: Avatar + Name + Company */}
-                    <div className="flex items-center gap-3.5">
-                      <img
-                        src={story.avatar}
-                        alt={story.name}
-                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover shadow-xs ring-2 ring-slate-100"
-                      />
-                      <div className="min-w-0">
-                        <h3 className="font-bold text-sm sm:text-base text-slate-900 leading-snug truncate">
-                          {story.name}
-                        </h3>
-                        <span className="text-[10px] font-bold text-[#5356e8] uppercase tracking-wider block">
-                          {story.company}
-                        </span>
-                      </div>
+                    {/* Card Top: Name + Company */}
+                    <div className="flex flex-col">
+                      <h3 className="font-bold text-base sm:text-lg text-slate-900 leading-tight">
+                        {story.name}
+                      </h3>
+                      <span className="text-[11px] font-bold text-[#5356e8] uppercase tracking-wider mt-1">
+                        {story.company}
+                      </span>
                     </div>
 
                     {/* Card Body: Quote */}
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed line-clamp-5 font-normal pt-2">
+                    <p className="text-slate-600 text-xs sm:text-sm md:text-[14px] leading-relaxed font-normal">
                       "{story.quote}"
                     </p>
                   </motion.div>
@@ -211,7 +226,7 @@ export default function Testimonials() {
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

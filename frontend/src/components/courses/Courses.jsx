@@ -22,7 +22,13 @@ export default function Courses({ onOpenModal }) {
       <div className="max-w-[1360px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16">
         
         {/* SECTION HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="text-center max-w-3xl mx-auto mb-16 sm:mb-24 space-y-4"
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1c2c36] tracking-tight leading-tight">
             Explore Our Courses
           </h2>
@@ -30,7 +36,7 @@ export default function Courses({ onOpenModal }) {
           <p className="text-slate-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto">
             Industry-standard engineering bootcamps, AI intelligence specializations, and cloud architecture certifications.
           </p>
-        </div>
+        </motion.div>
 
         {/* COURSES ALTERNATING LIST */}
         <div className="space-y-16 sm:space-y-24 md:space-y-32">

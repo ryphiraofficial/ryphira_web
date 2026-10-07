@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import FooterBrand from './FooterBrand';
 import FooterLinks from './FooterLinks';
 import FooterBottom from './FooterBottom';
@@ -13,7 +14,13 @@ export default function Footer() {
         </span>
       </div>
 
-      <div className="max-w-6xl mx-auto space-y-16 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-6xl mx-auto space-y-16 relative z-10"
+      >
         {/* Top Footer Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           <div className="lg:col-span-6">
@@ -26,7 +33,7 @@ export default function Footer() {
 
         {/* Bottom Footer Bar */}
         <FooterBottom />
-      </div>
+      </motion.div>
     </footer>
   );
 }

@@ -1,16 +1,16 @@
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, Layers, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import aboutBannerImg from '../assets/hero/about_woman_tablet_stylus.jpg';
 
 export default function About({ onOpenModal }) {
   const containerRef = useRef(null);
 
   const highlights = [
-    { label: 'Client Satisfaction', value: '99.8%', icon: ShieldCheck },
-    { label: 'Projects Delivered', value: '2,450+', icon: Zap },
-    { label: 'Global Partners', value: '50+', icon: Layers },
-    { label: 'Uptime Reliability', value: '99.99%', icon: Sparkles },
+    { label: 'Client Satisfaction', value: '99.8%' },
+    { label: 'Projects Delivered', value: '2,450+' },
+    { label: 'Global Partners', value: '50+' },
+    { label: 'Uptime Reliability', value: '99.99%' },
   ];
 
   return (
@@ -77,31 +77,23 @@ export default function About({ onOpenModal }) {
             METRICS & HIGHLIGHTS GRID
         ───────────────────────────────────────────────────────────── */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-2">
-          {highlights.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="bg-[#f8fafc] border border-slate-200/70 rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-between hover:border-[#284e51]/40 hover:shadow-md transition-all"
-              >
-                <div className="w-8 h-8 rounded-xl bg-[#eaedf0] text-[#284e51] flex items-center justify-center mb-3">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                    {item.value}
-                  </div>
-                  <div className="text-xs sm:text-sm font-medium text-slate-500 mt-0.5">
-                    {item.label}
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {highlights.map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              className="bg-[#f8fafc] border border-slate-200/70 rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-center hover:border-[#284e51]/40 hover:shadow-md transition-all"
+            >
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                {item.value}
+              </div>
+              <div className="text-xs sm:text-sm font-medium text-slate-500 mt-1">
+                {item.label}
+              </div>
+            </motion.div>
+          ))}
         </div>
 
       </div>

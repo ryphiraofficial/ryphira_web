@@ -283,7 +283,13 @@ export default function Hero({ onOpenModal }) {
           Featured Solutions (Left) & Popular Services (Right)
       ───────────────────────────────────────────────────────────── */}
       <div id="services" className="w-full max-w-[1360px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 xl:px-24 py-12 sm:py-16 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14"
+        >
           
           {/* LEFT: Featured Solutions (8 Columns) */}
           <div className="lg:col-span-8 flex flex-col">
@@ -371,7 +377,7 @@ export default function Hero({ onOpenModal }) {
             </div>
           </div>
 
-        </div>
+        </motion.div>
       </div>
 
     </section>
