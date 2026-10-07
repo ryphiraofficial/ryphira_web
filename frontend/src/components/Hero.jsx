@@ -39,9 +39,9 @@ export default function Hero({ onOpenModal }) {
     },
     {
       id: 2,
-      title: 'AI Neural Engine',
-      category: 'Ryphira AI Labs',
-      tag: 'v2.4 LLM',
+      title: 'Mobile App Development',
+      category: 'Ryphira Mobile Studio',
+      tag: 'iOS & Android',
       image: techCardAi,
       icon: Cpu,
     },

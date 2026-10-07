@@ -11,7 +11,7 @@ export default function FooterLinks() {
   ];
 
   const technologies = [
-    'AI & Neural Networks',
+    'Mobile App Development (iOS & Android)',
     'Full-Stack Web Development',
     'Cloud DevOps & Kubernetes',
     'Cyber Security & Zero Trust',
